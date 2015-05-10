@@ -1,0 +1,145 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "App";
+}
+
+ <link href="Scripts/twbs-bootstrap-7b9f204/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+  <style type="text/css">
+          
+      
+        input {margin:2px;}
+    </style>
+
+	 <script>
+        $(function () {
+            $('.js-popover').popover()
+            $('.js-tooltip').tooltip()
+            $('#tall-toggle').click(function () {
+                $('#tall').toggle()
+            })
+        })
+
+    </script>
+
+	   <script type="text/javascript">
+
+        function GetSum() {
+
+            var number1 = $("#txtFirstNum").val();
+            var number2 = $("#txtSecondNum").val();
+
+            if (number1 == "" || number2 == "") {
+                alert('You need to type two numbers!');
+                return;
+            }
+
+            $.ajax({
+                url: "http://hw-test.azurewebsites.net/AstelitWebService.asmx/TwoNumbersPlus",
+                type: 'POST',
+                data: '{number1: ' + number1 + ', number2: ' + number2 + '}',
+                       contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                            var myData = JSON.parse(data.d);
+                            $("#divResult").html("Сервис вернул сумму = " + myData.Result);
+                },
+                error: function (request, status, error) {
+
+                    $("#divResult").html("<div class='btn btn-danger'>Ошибка</div>&nbsp; Ошибка в процессе обработки запроса " + error);
+                }
+            });
+
+        }
+
+        function onLoad() {
+            app.initialize();
+            console.log("device reday !!!!")
+            document.addEventListener("deviceready", onDeviceReady, true);
+        }
+        function exitFromApp() {
+            console.log("in button");
+            alert('Программа будет закрыта');
+            navigator.app.exitApp();
+        }
+
+    </script>
+
+@section featured {
+<section class="featured">
+    <div class="content-wrapper">
+        <hgroup class="title">
+            <h1>@Page.Title.</h1>
+            <h2>Подсчет суммы чисел</h2>
+        </hgroup>
+        <p>
+            Используйте это приложения для того чтобы сложить два целых числа! Введите два целых числа и нажмите кнопку "Запросить" 
+			для предоставления
+        </p>
+    </div>
+</section>
+}
+
+<h3>Введите два числа:</h3>
+
+<ol class="round">
+    <li class="one">
+        <h5>Первое число</h5>
+        <input type="number" id="txtFirstNum" class="form-control js-popover"  
+                       title="Первое число" 
+                       data-content="Вы должны ввести целое число!" 
+                       data-placement="top" />
+    </li>
+
+    <li class="two">
+        <h5>Второе число</h5>
+        <input type="number" id="txtSecondNum" class="form-control js-popover"  
+                       title="Второе число" 
+                       data-content="Вы должны ввести еще одно целое число!" 
+                       data-placement="bottom" />
+    </li>
+
+    
+</ol>
+
+ <p style="text-align:right;">
+        <button type="button" class="btn" id="btnGetSumm" onclick="GetSum()">Запросить сумму</button>
+    </p>
+
+ <br />
+     
+      <div id="divResult" runat="server" ></div><br />
+      
+
+	   <script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/twbs-bootstrap-7b9f204/js/tests/vendor/jquery.min.js"></script>
+    <script src="Scripts/twbs-bootstrap-7b9f204/js/modal.js"></script>
+    <script src="Scripts/twbs-bootstrap-7b9f204/js/tooltip.js"></script>
+    <script src="Scripts/twbs-bootstrap-7b9f204/js/popover.js"></script>
+
+	 <ul>
+        <li>
+	<a href="#" data-toggle='modal' data-target='#myModal'>Зачем нужна эта программа ?</a></li>
+    </ul>
+
+	  <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">О программе</h4>
+        </div>
+        <div class="modal-body">
+          <h5>Зачем это нужно?</h5>
+
+          <p>Эта программа предназначена для показа возможностей работы PhoneGap with Bootstrap.</p>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+        </div>
+
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,37 @@
+﻿@{
+    Layout = "~/_SiteLayout.cshtml";
+    Page.Title = "О программе";
+}
+
+ <link href="Scripts/twbs-bootstrap-7b9f204/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+	   <script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+    <script src="Scripts/twbs-bootstrap-7b9f204/js/tests/vendor/jquery.min.js"></script>
+
+<hgroup class="title">
+    <h1>@Page.Title.</h1>
+    <h2>Зачем это нужно?</h2>
+</hgroup>
+
+<article>
+    <p>
+        Эта программа предназначена для показа возможностей работы PhoneGap.
+    </p>
+
+    <p>
+        Калькуляция осуществляется сервисом <a href="http://hw-test.azurewebsites.net/AstelitWebService.asmx">Azure Web-сервис</a>
+    </p>
+</article>
+
+<div style="height:200px;"></div>
+
+<aside>
+    <h3>Скачать</h3>
+    <p>
+        Вы можете скачать мобильное приложение:
+    </p>
+    <ul>
+        <li><a href="http://install.diawi.com/tAa9be">iPhone</a></li>
+        <li><a href="AstelitWebService.asmx/GetFile?filename=HW-Android.apk">Android</a></li>
+    </ul>
+</aside>
